@@ -1,21 +1,19 @@
+create table Products
+(
+    id          integer     not null primary key auto_increment,
+    name        varchar(40) not null,
+    description text        not null,
+    price       float       not null
+);
+
 create table Customers
 (
-    id         integer      not null,
+    id         integer      not null primary key auto_increment,
     firstname  varchar(20)  not null,
     familyname varchar(20)  not null,
     address    text         not null,
     username   varchar(20)  not null,
-    password   varchar(128) not null,
-    primary key (id autoincrement)
-);
-
-create table Products
-(
-    id          integer     not null,
-    name        varchar(40) not null,
-    description text        not null,
-    price       float       not null,
-    primary key (id autoincrement)
+    password   varchar(128) not null
 );
 
 create table Basket
@@ -23,10 +21,9 @@ create table Basket
     customer int     not null,
     product  int     not null,
     quantity int     not null,
-    id       integer not null,
-    primary key (id autoincrement),
-    foreign key (customer) references Customers,
-    foreign key (product) references Products
+    id       integer not null primary key auto_increment,
+    constraint fk_basket_customer FOREIGN KEY (customer) references Customers (id),
+    constraint fk_basket_product FOREIGN KEY (product) references Products (id)
 );
 
 
