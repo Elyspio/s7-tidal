@@ -2,5 +2,6 @@
 vendor
 composer.phar
 node_modules
-public/styles/css
 src/config/db.php
+src/views/public/styles/css
+

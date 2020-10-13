@@ -1,0 +1,13 @@
+{% extends "common/base.twig" %}
+
+{% block css %}
+    <link rel="stylesheet" href="/views/public/styles/css/errors/error.css">
+{% endblock %}
+
+{% block body %}
+    <div class="error">
+        <h1 class="error-title">An error occured</h1>
+        <p class="status"> code: {% block code %} {% endblock %}</p>
+        <p class="message">Message:{% block message %} {% endblock %}</p>
+    </div>
+{% endblock %}
