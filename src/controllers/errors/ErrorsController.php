@@ -1,7 +1,7 @@
 <?php
 
 
-namespace controllers\products;
+namespace controllers\core;
 
 
 use controllers\AbstractController;

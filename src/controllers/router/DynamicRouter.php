@@ -4,11 +4,9 @@
 namespace controllers\router {
 	require_once(__DIR__ . "/Endpoint.php");
 	require_once (__DIR__ . "/IRouter.php");
-	require_once (__DIR__ . "/../products/ProductsController.php");
 	require_once (__DIR__ . "/../errors/ErrorsController.php");
 
-	use controllers\products\ErrorsController;
-	use controllers\products\ProductsController;
+	use controllers\core\ErrorsController;
 	use Twig\Environment;
 
 
@@ -19,33 +17,19 @@ namespace controllers\router {
 		/**
 		 * @var Endpoint[] dictionnary<uri, Endpoint>
 		 */
-		private array $routes = [];
+		private static array $routes = [];
 
-		private Environment $twig;
 
-		/**
-		 * Router constructor.
-		 */
-		public function __construct()
+		public static function add_route(string $endpoint, $callback): void
 		{
-			$this->add_route("/", [ProductsController::instance(), "get_products"]);
-			$this->add_route("/products", [ProductsController::instance(), "get_products"]);
-			$this->add_route("/products/:item", [ProductsController::instance(), "get_item"]);
-		}
-
-		public function add_route(string $endpoint, $callback): void
-		{
-			$this->routes[$endpoint] = new Endpoint($endpoint, $callback);
+			self::$routes[$endpoint] = new Endpoint($endpoint, $callback);
 		}
 
 		public function route(string $uri = null): void
 		{
 			$endpoint = $this->get_endpoint($uri);
-
-
 			print_r($endpoint->get_route());
 			call_user_func($endpoint->get_callback(), $this->get_params($uri, $endpoint));
-
 		}
 
 
@@ -64,7 +48,7 @@ namespace controllers\router {
 
 		private function get_endpoint(string  $uri): Endpoint
 		{
-			$routes = $this->routes;
+			$routes = self::$routes;
 
 			usort($routes, static function(Endpoint $a, Endpoint $b) {
 				return strlen($a->get_route()) > strlen($b->get_route()) ? -1 : 1;
@@ -81,6 +65,10 @@ namespace controllers\router {
 			return new Endpoint("error/404", call_user_func([ErrorsController::instance(), "get_404"]));
 		}
 	}
+
+
+	require_once (__DIR__ . "/../core/ProductsController.php");
+	require_once (__DIR__ . "/../core/LoginController.php");
 
 }
 

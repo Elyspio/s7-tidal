@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "concurrently \"npm run dev-php\" \"npm run dev-scss\" ",
-    "dev-php": "killall php && php -S localhost:8080 src/index.php",
+    "dev-php": "killall php ; php -S localhost:8080 src/index.php",
     "dev-scss": "node-sass --watch --output-style compressed  src/views/public/styles/scss -o src/views/public/styles/css"
   },
   "repository": {
