@@ -1,51 +1,43 @@
 <?php
 
 namespace controllers\router {
+
+
 	class Endpoint
 	{
 
-		private string $template;
-		private array $params;
+		private array $callback;
 		private string $route;
 
 		/**
-		 * Endpoint constructor.
-		 * @param string $template
-		 * @param array $params
 		 * @param string $route
+		 * @param array $callback
 		 */
-		public function __construct(string $route, string $template, array $params = [])
+		public function __construct(string $route, array $callback)
 		{
-			$this->template = $template;
-			$this->params = $params;
+			$this->callback = $callback;
 			$this->route = $route;
 		}
 
 		/**
-		 * @return string
+		 * @return array method of the controller that will be called
 		 */
-		public function getTemplate(): string
+		public function get_callback()
 		{
-			return $this->template . ".twig";
+			return $this->callback;
 		}
 
-		/**
-		 * @return string[]
-		 */
-		public function getParams(): array
-		{
-			return $this->params;
-		}
+
 
 		/**
 		 * @return string the regex version of this endpoint ':x' are replaced with (.*)
 		 */
-		public function getRegex(): string
+		public function get_regex(): string
 		{
 
 			$search = "";
 
-			$path = explode("/", $this->getRoute());
+			$path = explode("/", $this->get_route());
 
 			$path = array_filter($path, static function ($a) {
 				return $a !== '';
@@ -64,7 +56,7 @@ namespace controllers\router {
 		/**
 		 * @return string
 		 */
-		public function getRoute(): string
+		public function get_route(): string
 		{
 			return $this->route;
 		}

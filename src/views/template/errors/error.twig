@@ -7,7 +7,7 @@
 {% block body %}
     <div class="error">
         <h1 class="error-title">An error occured</h1>
-        <p class="status"> code: {% block code %} {% endblock %}</p>
+        <p class="status"> code: {{ code }}</p>
         <p class="message">Message:{% block message %} {% endblock %}</p>
     </div>
 {% endblock %}

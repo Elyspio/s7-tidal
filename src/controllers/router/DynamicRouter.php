@@ -4,9 +4,12 @@
 namespace controllers\router {
 	require_once(__DIR__ . "/Endpoint.php");
 	require_once (__DIR__ . "/IRouter.php");
+	require_once (__DIR__ . "/../products/ProductsController.php");
+	require_once (__DIR__ . "/../errors/ErrorsController.php");
 
+	use controllers\products\ErrorsController;
+	use controllers\products\ProductsController;
 	use Twig\Environment;
-	use Twig\Loader\FilesystemLoader;
 
 
 	class DynamicRouter implements IRouter
@@ -25,34 +28,24 @@ namespace controllers\router {
 		 */
 		public function __construct()
 		{
-			$this->add_route("/", "test");
-			$this->add_route("/products", "products/list");
-			$this->add_route("/products/:item", "products/item", ["item"]);
-
-			$loader = new FilesystemLoader(__DIR__ . "/../../views/template", __DIR__ . "/../../views/template");
-			$this->twig = new Environment($loader);
-
-
+			$this->add_route("/", [ProductsController::instance(), "get_products"]);
+			$this->add_route("/products", [ProductsController::instance(), "get_products"]);
+			$this->add_route("/products/:item", [ProductsController::instance(), "get_item"]);
 		}
 
-		/**
-		 * @param string $endpoint
-		 * @param string $template
-		 * @param string[] $params mapping of URI parameter to be used in template
-		 */
-		public function add_route(string $endpoint, string $template, array $params = []): void
+		public function add_route(string $endpoint, $callback): void
 		{
-			$this->routes[$endpoint] = new Endpoint($endpoint, $template, $params);
+			$this->routes[$endpoint] = new Endpoint($endpoint, $callback);
 		}
 
 		public function route(string $uri = null): void
 		{
 			$endpoint = $this->get_endpoint($uri);
-			error_log("endpoint: " . $endpoint->getTemplate());
 
-			$this->get_params($uri, $endpoint);
 
-			$this->twig->display($endpoint->getTemplate(), $endpoint->getParams());
+			print_r($endpoint->get_route());
+			call_user_func($endpoint->get_callback(), $this->get_params($uri, $endpoint));
+
 		}
 
 
@@ -62,7 +55,7 @@ namespace controllers\router {
 		 * @return mixed[]
 		 */
 		private function get_params(string $uri, Endpoint $endpoint): array {
-			$regex =  $endpoint->getRegex();
+			$regex =  $endpoint->get_regex();
 			$res = [];
 			preg_match_all( $regex, $uri,$res);
 			return $res;
@@ -71,35 +64,22 @@ namespace controllers\router {
 
 		private function get_endpoint(string  $uri): Endpoint
 		{
-
 			$routes = $this->routes;
 
 			usort($routes, static function(Endpoint $a, Endpoint $b) {
-				return strlen($a->getRoute()) > strlen($b->getRoute()) ? -1 : 1;
+				return strlen($a->get_route()) > strlen($b->get_route()) ? -1 : 1;
 			});
 
 			foreach ($routes as $endpoint) {
-				$regex = $endpoint->getRegex();
-				echo "REGEX=" . $regex . " for " . $endpoint->getTemplate() . "\n";
+				$regex = $endpoint->get_regex();
+				echo "REGEX=" . $regex . " for " . $endpoint->get_route() . "\n";
 				if(count(preg_grep($regex, [$uri])) > 0) {
 					return $endpoint;
 				}
 			}
 
-			return new Endpoint("error/404", "errors/404",);
-
-
+			return new Endpoint("error/404", call_user_func([ErrorsController::instance(), "get_404"]));
 		}
-
-
-
-		private function containsParams(string $uri): bool
-		{
-			return strpos($uri, ":") !== false;
-		}
-
-
-
 	}
 
 }
