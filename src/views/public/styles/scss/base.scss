@@ -1,0 +1,23 @@
+body {
+  margin: 0;
+  padding: 0;
+
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: 'Roboto', sans-serif !important;
+}
+
+p, span, label, input, button {
+  font-family: 'Open-sans', serif !important;
+}
+
+@font-face {
+  font-family: "Open-sans";
+  src: url("/fonts/OpenSans/OpenSans-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/Roboto/Roboto-Regular.ttf") format("truetype");
+}
