@@ -1,4 +1,4 @@
 <?php
 
-$servable_files = ["css", "js", "html", "ico"];
+$servable_files = ["css", "js", "html", "ico", "ttf"];
 

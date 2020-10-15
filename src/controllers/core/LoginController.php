@@ -13,6 +13,7 @@ require_once (__DIR__ . "/../../controllers/router/DynamicRouter.php");
 
 
 DynamicRouter::add_route("/login", [LoginController::instance(), "get_login_page"]);
+DynamicRouter::add_route("/login/add", [LoginController::instance(), "get_login_add"]);
 
 class LoginController extends AbstractController
 {
@@ -34,6 +35,11 @@ class LoginController extends AbstractController
 	public function get_login_page(): void
 	{
 		$this->render("/login/login_page");
+	}
+
+	public function get_login_add(): void
+	{
+		$this->render("/login/login_add");
 	}
 
 
