@@ -1,7 +1,6 @@
-@import "../tools";
+@import '../utils.scss';
 
 .login-form {
-
   > div {
     @include elevation(1);
     form {
@@ -41,8 +40,4 @@
       margin-left: 2rem;
     }
   }
-
-
 }
-
-

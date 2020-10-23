@@ -1,0 +1,59 @@
+@import "./utils.scss";
+
+.footer {
+
+    background-color: $background;
+
+    ul {
+        list-style: none;
+      
+        .col-heading {
+          display: block;
+          font-size: 2rem;
+          text-transform: uppercase;
+          color: #ffffff;
+          font-weight: 500;
+          margin: 1rem 0;
+          padding: 0.4rem 0px;
+          border-bottom: 1px solid #c7c7c7;
+          letter-spacing: 3px;
+        }
+      
+        .fa {
+          color: #304f50;
+          margin-right: 10px;
+          font-size: 18px;
+          width: 2.25rem;
+        }
+      
+        & > li > a {
+          color: grey;
+          text-decoration: none;
+          line-height: 1.8;
+      
+          &:hover {
+            color: #ff6600;
+            font-weight: 500;
+          }
+        }
+      }
+      ul 
+      
+      #bottom-footer {
+        background-color: cadetblue;
+        color: white;
+        margin-top: 2rem;
+        padding-top: 0.3rem;
+      }
+      .vertical-links > li {
+        display: inline-block;
+        vertical-align: text-bottom;
+      }
+      .vertical-links > li > a {
+        color: white;
+        font-weight: 400;
+        margin-left: 1rem;
+        list-style-type: square;
+      }
+      
+}

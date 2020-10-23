@@ -1,6 +1,15 @@
+
+@import "./utils.scss";
+
 body {
   margin: 0;
   padding: 0;
+
+  > .container {
+    height: calc(100vh - 56px);
+  }
+
+  scrollbar-width: thin;
 
 }
 
@@ -20,4 +29,24 @@ p, span, label, input, button {
 @font-face {
   font-family: "Roboto";
   src: url("/fonts/Roboto/Roboto-Regular.ttf") format("truetype");
+}
+
+
+// scrollbars https://www.digitalocean.com/community/tutorials/css-scrollbars
+* {
+  scrollbar-width: thin;
+  scrollbar-color: $primary $background;
+}
+
+/* Works on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+*::-webkit-scrollbar-track {
+  background: $background;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: $primary;
+  border-radius: 20px;
+  border: 3px solid $background;
 }
