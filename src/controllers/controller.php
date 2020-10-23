@@ -4,8 +4,8 @@ session_start();
 
 use controllers\router\Router;
 
-require(__DIR__ . "/../models/db/UserRepository.php");
-require(__DIR__ . "/./router/Router.php");
+require_once(__DIR__ . "/../models/db/UserRepository.php");
+require_once(__DIR__ . "/./router/Router.php");
 
 
 $c = new Router();

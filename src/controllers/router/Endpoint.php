@@ -8,15 +8,18 @@ namespace controllers\router {
 
 		private array $callback;
 		private string $route;
+		private string $method;
 
 		/**
 		 * @param string $route
 		 * @param array $callback
+		 * @param string $method
 		 */
-		public function __construct(string $route, array $callback)
+		public function __construct(string $route, array $callback, string $method)
 		{
 			$this->callback = $callback;
 			$this->route = $route;
+			$this->method = $method;
 		}
 
 		/**
@@ -26,8 +29,6 @@ namespace controllers\router {
 		{
 			return $this->callback;
 		}
-
-
 
 		/**
 		 * @return string the regex version of this endpoint ':x' are replaced with (.*)
@@ -60,6 +61,13 @@ namespace controllers\router {
 		{
 			return $this->route;
 		}
+
+		public function get_method(): string
+		{
+			return $this->method;
+		}
+
+
 
 	}
 }

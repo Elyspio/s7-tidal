@@ -5,9 +5,10 @@ namespace controllers\router {
 	require_once(__DIR__ . "/Endpoint.php");
 	require_once (__DIR__ . "/IRouter.php");
 	require_once (__DIR__ . "/../errors/ErrorsController.php");
+	require_once (__DIR__ . "/../../models/db/RepositoryExceptionCode.php");
 
 	use controllers\core\ErrorsController;
-	use Twig\Environment;
+	use models\db\RepositoryExceptionCode;
 
 
 	class DynamicRouter implements IRouter
@@ -20,15 +21,16 @@ namespace controllers\router {
 		private static array $routes = [];
 
 
-		public static function add_route(string $endpoint, $callback): void
+		public static function add_route(string $endpoint, $callback, string $method): void
 		{
-			self::$routes[$endpoint] = new Endpoint($endpoint, $callback);
+			self::$routes[$endpoint] = new Endpoint($endpoint, $callback, $method);
 		}
 
 		public function route(string $uri = null): void
 		{
+			RepositoryExceptionCode::add_error_codes_to_js();
+
 			$endpoint = $this->get_endpoint($uri);
-			print_r($endpoint->get_route());
 			call_user_func($endpoint->get_callback(), $this->get_params($uri, $endpoint));
 		}
 
@@ -55,20 +57,27 @@ namespace controllers\router {
 			});
 
 			foreach ($routes as $endpoint) {
-				$regex = $endpoint->get_regex();
-				echo "REGEX=" . $regex . " for " . $endpoint->get_route() . "\n";
-				if(count(preg_grep($regex, [$uri])) > 0) {
-					return $endpoint;
+				# echo "Method=" . $_SERVER['REQUEST_METHOD'] . "\t";
+				if($_SERVER['REQUEST_METHOD'] === $endpoint->get_method()) {
+					$regex = $endpoint->get_regex();
+					# echo "REGEX=" . $regex . " for " . $endpoint->get_route() . "\n";
+					if(count(preg_grep($regex, [$uri])) > 0) {
+						return $endpoint;
+					}
 				}
+
 			}
 
-			return new Endpoint("error/404", call_user_func([ErrorsController::instance(), "get_404"]));
+				return new Endpoint("error/404", call_user_func([ErrorsController::instance(), "get_404"]), Method::$GET);
 		}
 	}
 
 
 	require_once (__DIR__ . "/../core/ProductsController.php");
 	require_once (__DIR__ . "/../core/LoginController.php");
+
+
+
 
 }
 

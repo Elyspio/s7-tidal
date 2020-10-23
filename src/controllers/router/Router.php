@@ -29,6 +29,7 @@ namespace controllers\router {
 			$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 			$this->static_router->is_static_file($uri) ? $this->static_router->route($uri) : $this->dynamic_router->route($uri);
 		}
+
 	}
 
 }
