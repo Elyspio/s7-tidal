@@ -1,9 +1,8 @@
-#!/usr/bin/env sh
 
 
 echo "Updating package dependencies"
 sudo apt update
-
+sudo apt install php -y
 
 echo "Installing composer and its dependencies"
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -11,6 +10,7 @@ php -r "if (hash_file('sha384', 'composer-setup.php') === '795f976fe0ebd8b75f26a
 php composer-setup.php
 php -r "unlink('composer-setup.php');"
 php composer.phar install
+
 
 
 echo "Installing NPM and its dependencies"

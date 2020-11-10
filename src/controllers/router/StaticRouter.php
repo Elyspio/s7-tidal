@@ -21,6 +21,7 @@ namespace controllers\router {
 				return (in_array($data["extension"], $servable_files, true));
 			}
 			return false;
+			$ae = [];
 		}
 
 		public function route(string $uri = null): void

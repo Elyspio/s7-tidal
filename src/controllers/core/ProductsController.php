@@ -40,7 +40,8 @@ class ProductsController extends AbstractController
 	}
 
 	public function get_item($item) : void{
-		$this->render("/products/item", ["id" => "toto"]);
+		print_r($item);
+		$this->render("/products/item", ["id" => $item[0]]);
 
 	}
 

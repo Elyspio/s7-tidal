@@ -3,13 +3,12 @@
 
 namespace controllers\router {
 	require_once(__DIR__ . "/Endpoint.php");
-	require_once (__DIR__ . "/IRouter.php");
-	require_once (__DIR__ . "/../errors/ErrorsController.php");
-	require_once (__DIR__ . "/../../models/db/RepositoryExceptionCode.php");
+	require_once(__DIR__ . "/IRouter.php");
+	require_once(__DIR__ . "/../errors/ErrorsController.php");
+	require_once(__DIR__ . "/../../models/db/repositories/RepositoryExceptionCode.php");
 
 	use controllers\core\ErrorsController;
-	use models\db\RepositoryExceptionCode;
-
+	use models\db\repositories\RepositoryExceptionCode;
 
 	class DynamicRouter implements IRouter
 	{
@@ -29,7 +28,6 @@ namespace controllers\router {
 		public function route(string $uri = null): void
 		{
 			RepositoryExceptionCode::add_error_codes_to_js();
-
 			$endpoint = $this->get_endpoint($uri);
 			call_user_func($endpoint->get_callback(), $this->get_params($uri, $endpoint));
 		}
@@ -40,15 +38,18 @@ namespace controllers\router {
 		 * @param Endpoint $endpoint
 		 * @return mixed[]
 		 */
-		private function get_params(string $uri, Endpoint $endpoint): array {
-			$regex =  $endpoint->get_regex();
+		private function get_params(string $uri, Endpoint $endpoint)
+		{
+			$regex = $endpoint->get_regex();
+			print_r($regex);
 			$res = [];
-			preg_match_all( $regex, $uri,$res);
-			return $res;
+			preg_match_all($regex, $uri, $res);
+			return $res[1];
 
 		}
 
-		private function get_endpoint(string  $uri): Endpoint
+
+		private function get_endpoint(string $uri): Endpoint
 		{
 			$routes = self::$routes;
 

@@ -1,20 +1,21 @@
 <?php
 
 
-namespace models\entities {
+namespace models\db\entities {
 
 
 	class UserEntity
 	{
-		private int $id;
+		private ?int $id;
 		private string $first_name;
 		private string $family_name;
 		private string $address;
 		private string $username;
 		/**
-		 * @var string stored as md5
+		 * @var string stored as raw
 		 */
 		private string $password;
+		private string $mail;
 
 		/**
 		 * UserEntity constructor.
@@ -24,8 +25,9 @@ namespace models\entities {
 		 * @param string $address
 		 * @param string $username
 		 * @param string $password
+		 * @param string $mail
 		 */
-		public function __construct(?int $id, string $first_name, string $family_name, string $address, string $username, string $password)
+		public function __construct(?int $id, string $first_name, string $family_name, string $address, string $username, string $password, string $mail)
 		{
 			$this->id = $id;
 			$this->first_name = $first_name;
@@ -33,6 +35,7 @@ namespace models\entities {
 			$this->address = $address;
 			$this->username = $username;
 			$this->password = $password;
+			$this->mail = $mail;
 		}
 
 
@@ -68,6 +71,23 @@ namespace models\entities {
 		{
 			return $this->password;
 		}
+
+		/**
+		 * @return string
+		 */
+		public function get_mail(): string
+		{
+			return $this->mail;
+		}
+
+		/**
+		 * @param string $mail
+		 */
+		public function setMail(string $mail): void
+		{
+			$this->mail = $mail;
+		}
+
 
 	}
 }
