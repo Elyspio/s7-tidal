@@ -10,7 +10,6 @@ namespace controllers {
 	use Twig\Error\RuntimeError;
 	use Twig\Error\SyntaxError;
 	use Twig\Loader\FilesystemLoader;
-
 	require_once(__DIR__ . "/../models/services/LoginService.php");
 	require_once(__DIR__ . "/../models/services/MarketService.php");
 

@@ -6,7 +6,6 @@ namespace controllers\core;
 
 use controllers\AbstractController;
 
-require_once (__DIR__ . "/../AbstractController.php");
 
 
 class ErrorsController extends AbstractController

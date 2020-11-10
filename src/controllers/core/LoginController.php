@@ -8,13 +8,7 @@ use controllers\AbstractController;
 use controllers\router\DynamicRouter;
 use controllers\router\Method;
 
-require_once(__DIR__ . "/../AbstractController.php");
-require_once(__DIR__ . "/../../controllers/router/DynamicRouter.php");
-require_once(__DIR__ . "/../../controllers/router/Method.php");
-DynamicRouter::add_route("/login", [LoginController::instance(), "get_login_page"], Method::$GET);
-DynamicRouter::add_route("/login/add", [LoginController::instance(), "get_login_add"], Method::$GET);
-DynamicRouter::add_route("/api/login/verify", [LoginController::instance(), "verify_identity"], Method::$GET);
-DynamicRouter::add_route("/api/login/create", [LoginController::instance(), "create_account"], Method::$POST);
+
 
 class LoginController extends AbstractController
 {
@@ -51,3 +45,8 @@ class LoginController extends AbstractController
 		$this->loginService->create_account();
 	}
 }
+
+DynamicRouter::add_route("/login", [LoginController::instance(), "get_login_page"], Method::$GET);
+DynamicRouter::add_route("/login/add", [LoginController::instance(), "get_login_add"], Method::$GET);
+DynamicRouter::add_route("/api/login/verify", [LoginController::instance(), "verify_identity"], Method::$GET);
+DynamicRouter::add_route("/api/login/create", [LoginController::instance(), "create_account"], Method::$POST);

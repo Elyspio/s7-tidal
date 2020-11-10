@@ -5,9 +5,6 @@ namespace models\db\repositories {
 
 	use models\db\entities\UserEntity;
 
-	require_once(__DIR__ . "/Repository.php");
-	require_once(__DIR__ . "/../entities/UserEntity.php");
-
 
 
 	class UserRepository extends Repository

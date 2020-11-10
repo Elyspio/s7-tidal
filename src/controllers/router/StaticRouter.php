@@ -3,7 +3,6 @@
 
 namespace controllers\router {
 
-	require_once (__DIR__ . "/IRouter.php");
 
 
 	class StaticRouter implements IRouter

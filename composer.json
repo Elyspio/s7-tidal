@@ -1,11 +1,16 @@
 {
-    "require": {
-        "twig/twig": "^3.0",
-      "ext-pdo": "*",
-      "ext-json": "*"
+  "require": {
+    "twig/twig": "^3.0",
+    "ext-pdo": "*",
+    "ext-json": "*"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "controllers\\": "src/controllers",
+      "models\\": "src/models"
     }
-    ,
-    "require-dev": {
-        "roave/security-advisories": "dev-master"
-    }
+  }
 }

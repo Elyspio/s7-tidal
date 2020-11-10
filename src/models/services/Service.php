@@ -4,8 +4,6 @@
 namespace models\services;
 
 
-require_once (__DIR__ . "/../db/repositories/ProductRepository.php");
-require_once (__DIR__ . "/../db/repositories/UserRepository.php");
 
 use models\db\repositories\ProductRepository;
 use models\db\repositories\UserRepository;

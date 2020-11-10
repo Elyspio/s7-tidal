@@ -6,7 +6,6 @@ namespace models\services;
 use models\db\entities\UserEntity;
 use models\db\repositories\RepositoryExceptionCode;
 
-require_once (__DIR__ . "\Service.php");
 
 class LoginService extends Service
 {

@@ -2,10 +2,6 @@
 
 
 namespace controllers\router {
-	require_once(__DIR__ . "/Endpoint.php");
-	require_once(__DIR__ . "/IRouter.php");
-	require_once(__DIR__ . "/../errors/ErrorsController.php");
-	require_once(__DIR__ . "/../../models/db/repositories/RepositoryExceptionCode.php");
 
 	use controllers\core\ErrorsController;
 	use models\db\repositories\RepositoryExceptionCode;
@@ -41,11 +37,12 @@ namespace controllers\router {
 		private function get_params(string $uri, Endpoint $endpoint)
 		{
 			$regex = $endpoint->get_regex();
-			print_r($regex);
 			$res = [];
 			preg_match_all($regex, $uri, $res);
-			return $res[1];
-
+			if(count($res) > 1) {
+				return $res[1];
+			}
+			return [];
 		}
 
 
@@ -58,10 +55,8 @@ namespace controllers\router {
 			});
 
 			foreach ($routes as $endpoint) {
-				# echo "Method=" . $_SERVER['REQUEST_METHOD'] . "\t";
 				if($_SERVER['REQUEST_METHOD'] === $endpoint->get_method()) {
 					$regex = $endpoint->get_regex();
-					# echo "REGEX=" . $regex . " for " . $endpoint->get_route() . "\n";
 					if(count(preg_grep($regex, [$uri])) > 0) {
 						return $endpoint;
 					}
@@ -72,7 +67,6 @@ namespace controllers\router {
 				return new Endpoint("error/404", call_user_func([ErrorsController::instance(), "get_404"]), Method::$GET);
 		}
 	}
-
 
 	require_once (__DIR__ . "/../core/ProductsController.php");
 	require_once (__DIR__ . "/../core/LoginController.php");

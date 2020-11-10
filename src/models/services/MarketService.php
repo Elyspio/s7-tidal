@@ -3,18 +3,19 @@
 
 namespace models\services;
 
-use models\db\entities\ProductEntity;
+use models\data\ProductUser;
 
-require_once (__DIR__ . "\Service.php");
 
 class MarketService extends Service
 {
 	/**
-	 * @param string $name_filter
-	 * @return ProductEntity[]
+	 * @param string|null $name_filter
+	 * @return ProductUser[]
 	 */
-	public function get_products(string $name_filter): array
+	public function get_products(?string $name_filter = null): array
 	{
-		$this->productRepository->get_products($name_filter);
+		$products = $this->productRepository->get_products($name_filter);
+
+		return $products;
 	}
 }

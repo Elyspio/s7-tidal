@@ -3,10 +3,6 @@
 
 namespace controllers\router {
 
-	require_once(__DIR__ . "/Endpoint.php");
-	require_once(__DIR__ . "/StaticRouter.php");
-	require_once(__DIR__ . "/DynamicRouter.php");
-	require_once(__DIR__ . "/IRouter.php");
 
 	class Router implements IRouter
 	{
