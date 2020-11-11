@@ -4,11 +4,11 @@
 namespace controllers\core;
 
 
+use config\Debug;
 use controllers\AbstractController;
 use controllers\router\DynamicRouter;
 use controllers\router\Method;
-
-
+use models\Session;
 
 class ProductsController extends AbstractController
 {
@@ -26,11 +26,17 @@ class ProductsController extends AbstractController
 	}
 
 
-
 	public function get_products(): void
 	{
-		$this->marketService->get_products();
-		$this->render("/products/list");
+
+		if (Session::get_config()->get_user()->getId() !== null) {
+			$products = $this->marketService->get_products_for_authenticated_user(Session::get_config()->get_user()->getId());
+		} else {
+			$products = $this->marketService->get_products_for_anonymous_user();
+		}
+		print_r($products);
+		Debug::log($products);
+		$this->render("/products/list", ["products" => $products]);
 	}
 
 	public function get_item($item) : void{

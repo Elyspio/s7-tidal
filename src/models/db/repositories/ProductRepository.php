@@ -5,14 +5,12 @@ namespace models\db\repositories;
 
 use models\db\entities\ProductEntity;
 
-
-
 class ProductRepository extends Repository
 {
 
 	private function dbToEntity($db): ProductEntity
 	{
-		return new ProductEntity($db["id"], $db["name"], $db["description"], $db["price"]);
+		return new ProductEntity($db["id"], $db["name"], $db["description"], $db["price"], $db["img_name"]);
 	}
 
 	/**
@@ -23,7 +21,7 @@ class ProductRepository extends Repository
 	{
 		$query = "select * from products";
 		if ($name_filter != null) {
-			$query .= " where name = :name";
+			$query .= " where name like '%:name%'";
 		}
 		$smt = parent::$bdd->prepare($query);
 		$smt->execute($name_filter !== null ?  [":name" => $name_filter]: null);

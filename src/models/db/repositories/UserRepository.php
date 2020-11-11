@@ -5,8 +5,6 @@ namespace models\db\repositories {
 
 	use models\db\entities\UserEntity;
 
-
-
 	class UserRepository extends Repository
 	{
 
@@ -34,12 +32,27 @@ namespace models\db\repositories {
 			$smt = parent::$bdd->prepare($query);
 			$smt->execute([":username" => $username]);
 			$results = $smt->fetchAll();
-			error_log("result: " . json_encode($results));
-			if(count($results) === 0) {
+			if (count($results) === 0) {
 				return null;
 			}
+			return $this->dbToEntity($results[0]);
+		}
 
 
+		/**
+		 * Find an user by his id
+		 * @param int $id
+		 * @return UserEntity | null
+		 */
+		public function get_user_by_id(int $id): ?UserEntity
+		{
+			$query = "select * from customers where id = :id";
+			$smt = parent::$bdd->prepare($query);
+			$smt->execute([":id" => $id]);
+			$results = $smt->fetchAll();
+			if (count($results) === 0) {
+				return null;
+			}
 			return $this->dbToEntity($results[0]);
 		}
 

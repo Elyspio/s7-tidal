@@ -6,9 +6,9 @@ use models\db\entities\UserEntity;
 
 class ProductUser
 {
-	private ProductEntity $product;
+	public ProductEntity $product;
 	private UserEntity $user;
-	private int $quantity;
+	public int $quantity;
 
 	/**
 	 * ProductUser constructor.
@@ -26,15 +26,16 @@ class ProductUser
 	/**
 	 * @return ProductEntity
 	 */
-	public function get_product(): ProductEntity
+	public function getProduct(): ProductEntity
 	{
+		error_log("tes");
 		return $this->product;
 	}
 
 	/**
 	 * @param ProductEntity $product
 	 */
-	public function set_product(ProductEntity $product): void
+	public function setProduct(ProductEntity $product): void
 	{
 		$this->product = $product;
 	}
@@ -42,7 +43,7 @@ class ProductUser
 	/**
 	 * @return UserEntity
 	 */
-	public function get_user(): UserEntity
+	public function getUser(): UserEntity
 	{
 		return $this->user;
 	}
@@ -50,7 +51,7 @@ class ProductUser
 	/**
 	 * @param UserEntity $user
 	 */
-	public function set_user(UserEntity $user): void
+	public function setUser(UserEntity $user): void
 	{
 		$this->user = $user;
 	}
@@ -58,7 +59,7 @@ class ProductUser
 	/**
 	 * @return int
 	 */
-	public function get_quantity(): int
+	public function getQuantity(): int
 	{
 		return $this->quantity;
 	}
@@ -66,7 +67,7 @@ class ProductUser
 	/**
 	 * @param int $quantity
 	 */
-	public function set_quantity(int $quantity): void
+	public function setQuantity(int $quantity): void
 	{
 		$this->quantity = $quantity;
 	}

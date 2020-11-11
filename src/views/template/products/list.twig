@@ -1,6 +1,33 @@
 {% extends "common/base.twig" %}
 
+
+
+{% block css %}
+    <link rel="stylesheet" href="/styles/css/products/products.css">
+{% endblock %}
+
 {% block body %}
-    LIST
-    <a href="/products/A">Go to A</a>
+
+
+    <div class="products">
+
+        <div class="list">
+            {% for product in products %}
+
+                <div class="card">
+                    <img class="card-img-top" src="/images/{{ product.product.imagePath }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.product.name }}</h5>
+                        <p class="card-text">{{ product.product.description }}</p>
+                        <i class="material-icons">face</i>
+                    </div>
+                </div>
+
+            {% endfor %}
+           
+        </div>
+
+    </div>
+
+
 {% endblock %}

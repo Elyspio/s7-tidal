@@ -38,44 +38,106 @@ namespace models\db\entities {
 			$this->mail = $mail;
 		}
 
-
-		public function get_id(): int
+		/**
+		 * @return int|null
+		 */
+		public function getId(): ?int
 		{
 			return $this->id;
 		}
 
-		public function get_first_name(): string
+		/**
+		 * @param int|null $id
+		 */
+		public function setId(?int $id): void
 		{
-			return $this->first_name;
-		}
-
-
-		public function get_family_name(): string
-		{
-			return $this->family_name;
-		}
-
-
-		public function get_address(): string
-		{
-			return $this->address;
-		}
-
-
-		public function get_username(): string
-		{
-			return $this->username;
-		}
-
-		public function get_password(): string
-		{
-			return $this->password;
+			$this->id = $id;
 		}
 
 		/**
 		 * @return string
 		 */
-		public function get_mail(): string
+		public function getFirstName(): string
+		{
+			return $this->first_name;
+		}
+
+		/**
+		 * @param string $first_name
+		 */
+		public function setFirstName(string $first_name): void
+		{
+			$this->first_name = $first_name;
+		}
+
+		/**
+		 * @return string
+		 */
+		public function getFamilyName(): string
+		{
+			return $this->family_name;
+		}
+
+		/**
+		 * @param string $family_name
+		 */
+		public function setFamilyName(string $family_name): void
+		{
+			$this->family_name = $family_name;
+		}
+
+		/**
+		 * @return string
+		 */
+		public function getAddress(): string
+		{
+			return $this->address;
+		}
+
+		/**
+		 * @param string $address
+		 */
+		public function setAddress(string $address): void
+		{
+			$this->address = $address;
+		}
+
+		/**
+		 * @return string
+		 */
+		public function getUsername(): string
+		{
+			return $this->username;
+		}
+
+		/**
+		 * @param string $username
+		 */
+		public function setUsername(string $username): void
+		{
+			$this->username = $username;
+		}
+
+		/**
+		 * @return string
+		 */
+		public function getPassword(): string
+		{
+			return $this->password;
+		}
+
+		/**
+		 * @param string $password
+		 */
+		public function setPassword(string $password): void
+		{
+			$this->password = $password;
+		}
+
+		/**
+		 * @return string
+		 */
+		public function getMail(): string
 		{
 			return $this->mail;
 		}

@@ -10,6 +10,7 @@ namespace models\db\entities {
 		private string $description;
 		private string $name;
 		private float $price;
+		private string $imagePath;
 
 		/**
 		 * ProductEntity constructor.
@@ -17,19 +18,22 @@ namespace models\db\entities {
 		 * @param string $name
 		 * @param string $description
 		 * @param float $price
+		 * @param string $imagePath
 		 */
-		public function __construct(?int $id, string $name,  string $description, float $price)
+		public function __construct(?int $id, string $name, string $description, float $price, string $imagePath)
 		{
 			$this->id = $id;
 			$this->description = $description;
 			$this->name = $name;
 			$this->price = $price;
+			$this->imagePath = $imagePath;
+
 		}
 
 		/**
 		 * @return int|null
 		 */
-		public function get_id(): ?int
+		public function getId(): ?int
 		{
 			return $this->id;
 		}
@@ -37,7 +41,7 @@ namespace models\db\entities {
 		/**
 		 * @param int|null $id
 		 */
-		public function set_id(?int $id): void
+		public function setId(?int $id)
 		{
 			$this->id = $id;
 		}
@@ -45,7 +49,7 @@ namespace models\db\entities {
 		/**
 		 * @return string
 		 */
-		public function get_description(): string
+		public function getDescription(): string
 		{
 			return $this->description;
 		}
@@ -53,7 +57,7 @@ namespace models\db\entities {
 		/**
 		 * @param string $description
 		 */
-		public function set_description(string $description): void
+		public function setDescription(string $description): void
 		{
 			$this->description = $description;
 		}
@@ -61,7 +65,7 @@ namespace models\db\entities {
 		/**
 		 * @return string
 		 */
-		public function get_name(): string
+		public function getName(): string
 		{
 			return $this->name;
 		}
@@ -69,7 +73,7 @@ namespace models\db\entities {
 		/**
 		 * @param string $name
 		 */
-		public function set_name(string $name): void
+		public function setName(string $name): void
 		{
 			$this->name = $name;
 		}
@@ -77,7 +81,7 @@ namespace models\db\entities {
 		/**
 		 * @return float
 		 */
-		public function get_price(): float
+		public function getPrice(): float
 		{
 			return $this->price;
 		}
@@ -85,9 +89,25 @@ namespace models\db\entities {
 		/**
 		 * @param float $price
 		 */
-		public function set_price(float $price): void
+		public function setPrice(float $price): void
 		{
 			$this->price = $price;
+		}
+
+		/**
+		 * @return string
+		 */
+		public function getImagePath(): string
+		{
+			return $this->imagePath;
+		}
+
+		/**
+		 * @param string $imagePath
+		 */
+		public function setImagePath(string $imagePath): void
+		{
+			$this->imagePath = $imagePath;
 		}
 
 	}
